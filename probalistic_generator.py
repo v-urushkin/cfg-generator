@@ -72,7 +72,7 @@ def generate(grammar: Grammar_type) -> str:
 
 def main(gram_pth: str, output_pth: str, n_iterations: int, seed: Optional[int] = None) -> None:
     pth = os.path.join(gram_pth)
-    with open('connl_gram.json', 'r') as file:
+    with open(pth, 'r') as file:
         raw_gram = json.load(file)
     # parser = Lark(open(pth).read(), start='start', parser='lalr')
     print(datetime.now().strftime("%Y-%M-%d %H:%M:%S"), 'Start parsing grammar.')
