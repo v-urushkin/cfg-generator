@@ -92,7 +92,7 @@ def main(gram_pth: str, output_pth: str, n_iterations: int, seed: Optional[int] 
 
 if __name__ == '__main__':
     argParser = argparse.ArgumentParser()
-    argParser.add_argument('-i', '--input', dest='grammar', type=validate_input_file, required=True, help='Input Lark grammar')
+    argParser.add_argument('-i', '--input', dest='grammar', type=validate_input_file, required=True, help='Input grammar in JSON format')
     argParser.add_argument('-o', '--output', dest='output', type=validate_output_file, required=True, help='Output text file')
     argParser.add_argument('-n', '--n_iterations', dest='n_iterations', required=True, type=int, help='Number of strings to generate')
     argParser.add_argument('-s', '--seed', dest='seed', required=False, type=int, help='Randsom seed')
