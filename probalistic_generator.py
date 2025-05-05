@@ -67,12 +67,13 @@ def reverse_normalization(x: List[str]) -> str:
     # for s in txts:
     #     s[0] = s[0].upper()
     # re.split(r'(?<=[.!?])', txt)
-    # # txt = txt.replace(' .', '.').replace(' ?', '?').replace(' !', '!')
-    # # txt = txt.replace(' ,', ',').replace(' :', ':').replace(' ;', ';')
-    # # txt = txt.replace(' \'', '\'')
+    txt = '\n'.join(txts)
+    txt = txt.replace(' .', '.').replace(' ?', '?').replace(' !', '!')
+    txt = txt.replace(' ,', ',').replace(' :', ':').replace(' ;', ';')
+    txt = txt.replace(' \'', '\'')
     # txt.split()
     
-    return '\n'.join(txts)
+    return txt
 
 
 def generate(grammar: Grammar_type, do_rnorm: bool = True) -> str:
