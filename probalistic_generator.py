@@ -1,6 +1,7 @@
 import os
 import argparse
 import random
+import re
 import json
 from datetime import datetime
 
@@ -11,7 +12,11 @@ from typing import Dict, List, Union, Optional
 
 from tqdm import tqdm
 
+from utils import split_by_punct
+
+
 Grammar_type = Dict[Nonterminal, List[Union[List[Nonterminal], str]]]
+
 
 def validate_input_file(grammar):
     if not os.path.exists(grammar):
@@ -46,8 +51,31 @@ def json_to_grammar(raw_gram: Dict[str, List[str]]) -> Grammar_type:
     return grammar_as_dict
 
 
+def reverse_normalization(x: List[str]) -> str:
+    """
+    This function converts a list of strings (words) into a punctuation- and capitalization-correct string.  
+    Example:  
+    ['did', 'You', 'close', 'the', 'door', '?'] -> 'Did you close the door?'
+    """
+    if len(x) == 0:
+        return ""
+    if len(x) == 1:
+        return x[0]
+    
+    x_splitted = split_by_punct(x)
+    txts = [' '.join(s).lower() for s in x_splitted]
+    # for s in txts:
+    #     s[0] = s[0].upper()
+    # re.split(r'(?<=[.!?])', txt)
+    # # txt = txt.replace(' .', '.').replace(' ?', '?').replace(' !', '!')
+    # # txt = txt.replace(' ,', ',').replace(' :', ':').replace(' ;', ';')
+    # # txt = txt.replace(' \'', '\'')
+    # txt.split()
+    
+    return '\n'.join(txts)
 
-def generate(grammar: Grammar_type) -> str:
+
+def generate(grammar: Grammar_type, do_rnorm: bool = True) -> str:
     """
     Iteratively generate text using a stack-based approach
     """
@@ -66,8 +94,9 @@ def generate(grammar: Grammar_type) -> str:
         else:  # Terminal symbol
             # parts.append(parser.get_terminal(symbol.name).pattern.value)
             parts.append(current.strip('\"'))
+    if do_rnorm:
+        return reverse_normalization(parts)
     return ' '.join(parts)
-
 
 
 def main(gram_pth: str, output_pth: str, n_iterations: int, seed: Optional[int] = None) -> None:
