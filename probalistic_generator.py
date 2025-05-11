@@ -65,16 +65,17 @@ def reverse_normalization(x: List[str], NNP: Set[Optional[str]] = set()) -> str:
         return x[0]
     
     x_splitted = preprocess(x, NNP)
-    txts = [' '.join(s) for s in x_splitted]
+    txts = [' '.join(s).replace(' .', '.').replace(' ?', '?').replace(' !', '!') for s in x_splitted]
     txt = ' '.join(txts)
-    txt = txt.replace(' `` ', ' ``').replace(' ` ', '` ')
-    txt = txt.replace(' .', '.').replace(' ?', '?').replace(' !', '!')
+    txt = txt.replace('`` ', '``').replace(' ` ', '` ')
+    # txt = txt.replace(' .', '.').replace(' ?', '?').replace(' !', '!')
     txt = txt.replace(' ,', ',').replace(' :', ':').replace(' ;', ';')
     txt = txt.replace(' \'', '\'').replace(' - ', '-')
     txt = txt.replace('_lrb_ ', '(').replace(' _rrb_', ')')
     txt = txt.replace('_lcb_ ', '(').replace(' _rcb_', ')')
     txt = txt.replace('_lsb_ ', '(').replace(' _rsb_', ')')
     txt = txt.replace(" n't", "n't")
+    txt = txt.replace(",,", ",")
     return txt
 
 
