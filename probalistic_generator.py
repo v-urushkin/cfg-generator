@@ -74,7 +74,7 @@ def reverse_normalization(x: List[str], NNP: Set[Optional[str]] = set()) -> str:
     txt = txt.replace('_lrb_ ', '(').replace(' _rrb_', ')')
     txt = txt.replace('_lcb_ ', '(').replace(' _rcb_', ')')
     txt = txt.replace('_lsb_ ', '(').replace(' _rsb_', ')')
-    
+    txt = txt.replace(" n't", "n't")
     return txt
 
 
