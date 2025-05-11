@@ -72,7 +72,7 @@ def reverse_normalization(x: List[str], NNP: Set[Optional[str]] = set()) -> str:
     txt = txt.replace(' ,', ',').replace(' :', ':').replace(' ;', ';')
     txt = txt.replace(' \'', '\'').replace(' - ', '-')
     txt = txt.replace('_lrb_ ', '(').replace(' _rrb_', ')')
-    txt = txt.replace('_lcb_ ', '(').replace(' _rсb_', ')')
+    txt = txt.replace('_lcb_ ', '(').replace(' _rcb_', ')')
     txt = txt.replace('_lsb_ ', '(').replace(' _rsb_', ')')
     
     return txt
@@ -125,7 +125,7 @@ def main(gram_pth: str, output_pth: str, n_iterations: int, seed: Optional[int] 
     file_counter = 1
     new_filename = output_path.parent / f"{output_path.stem}_{file_counter - 1}{output_path.suffix}"
     current_row_count = 0
-    rows_per_file = 5_000  # Maximum data rows per file
+    rows_per_file = 1_000_000  # Maximum data rows per file
 
     # Open the initial file
     current_file = open(new_filename, mode='w', newline='', encoding='utf-8')
