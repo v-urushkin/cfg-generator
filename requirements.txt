@@ -1,2 +1,5 @@
+huggingface-hub
 nltk
+notebook
+pandas
 tqdm

@@ -179,3 +179,6 @@ cython_debug/
 !test_gram.json
 
 *.txt
+*.csv
+gen
+.DS_Store
